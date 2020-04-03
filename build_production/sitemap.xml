@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+ <url>
+  <loc>https://ldapwatchdog.com</loc>
+  <lastmod>2020-04-03T14:58:54+00:00</lastmod>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://ldapwatchdog.com/docs/custom-404-page</loc>
+  <lastmod>2020-04-03T14:58:54+00:00</lastmod>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://ldapwatchdog.com/docs/navigation</loc>
+  <lastmod>2020-04-03T14:58:54+00:00</lastmod>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://ldapwatchdog.com/docs/getting-started</loc>
+  <lastmod>2020-04-03T14:58:54+00:00</lastmod>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://ldapwatchdog.com/docs/customizing-your-site</loc>
+  <lastmod>2020-04-03T14:58:54+00:00</lastmod>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://ldapwatchdog.com/docs/algolia-docsearch</loc>
+  <lastmod>2020-04-03T14:58:54+00:00</lastmod>
+  <changefreq>daily</changefreq>
+ </url>
+</urlset>
