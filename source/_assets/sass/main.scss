@@ -1,13 +1,69 @@
 @tailwind base;
 @tailwind components;
 
-// Code syntax highlighting,
-// powered by https://highlightjs.org
-@import '~highlight.js/styles/a11y-light.css';
+@import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+@import 'prism-theme';
 
 @import 'base';
 @import 'navigation';
-@import 'documentation';
 @import 'search';
 
 @tailwind utilities;
+
+.feature {
+  @apply .flex;
+  @apply .flex-col;
+
+  pre {
+    @apply .my-0;
+    @apply .rounded-t-none;
+  }
+
+  .top-bar {
+    height: 35px;
+    @apply .bg-gray-700;
+    @apply .rounded-t-lg;
+
+    .circles {
+      @apply .pt-1;
+      @apply .pl-3;
+      .circle {
+        @apply .rounded-full;
+        @apply .inline-block;
+        height: 12px;
+        width: 12px;
+      }
+      .circle-red {
+        @apply .bg-red-500;
+      }
+      .circle-yellow {
+        @apply .bg-yellow-500;
+      }
+      .circle-green {
+        @apply .bg-green-500;
+      }
+    }
+  }
+}
+
+.content {
+  ol,ul {
+    @apply .ml-8;
+  }
+
+  ul {
+    list-style:circle;
+  }
+
+  /* Hide scrollbars. */
+  pre {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    ::-webkit-scrollbar { /* WebKit */
+      width: 0;
+      height: 0;
+    }
+  }
+}
