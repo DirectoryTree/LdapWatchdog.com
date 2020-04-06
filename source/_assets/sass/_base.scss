@@ -13,7 +13,8 @@ a {
 }
 
 blockquote {
-    @apply .border-blue-400;
+    @apply .border-black;
+    @apply .bg-gray-300;
     @apply .border-l-4;
     @apply .font-normal;
     @apply .italic;
@@ -21,6 +22,18 @@ blockquote {
     @apply .pl-6;
     @apply .text-gray-800;
     @apply .text-lg;
+    @apply .rounded;
+    @apply .py-2;
+    @apply .px-4;
+    @apply .shadow;
+
+    p {
+        @apply .m-0;
+    }
+
+    ul:last-child {
+        @apply .mb-0;
+    }
 }
 
 code {

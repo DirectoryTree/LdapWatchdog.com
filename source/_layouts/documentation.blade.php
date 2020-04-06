@@ -11,11 +11,11 @@
             @include('_nav.menu', ['items' => $page->navigation])
         </nav>
 
-        <div class="DocSearch-content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
+        <div class="DocSearch-content content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
             @yield('content')
 
             <div class="mt-12 pt-8 pb-6 border-t-2">
-                @yield('footer')
+                @include('_nav.footer-links', ['items' => $page->navigation])
             </div>
         </div>
     </div>

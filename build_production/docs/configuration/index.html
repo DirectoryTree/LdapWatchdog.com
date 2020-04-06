@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="description" content="Getting started with Jigsaw&#039;s docs starter template is as easy as 1, 2, 3.">
+        <meta name="description" content="Configuring Watchdogs features">
 
         <meta property="og:site_name" content="Monitor &amp; Audit your Active Directory server."/>
-        <meta property="og:title" content="Getting Started | Monitor &amp; Audit your Active Directory server."/>
-        <meta property="og:description" content="Getting started with Jigsaw&#039;s docs starter template is as easy as 1, 2, 3."/>
-        <meta property="og:url" content="https://ldapwatchdog.com/docs/getting-started"/>
+        <meta property="og:title" content="Configuring Watchdog | Monitor &amp; Audit your Active Directory server."/>
+        <meta property="og:description" content="Configuring Watchdogs features"/>
+        <meta property="og:url" content="https://ldapwatchdog.com/docs/configuration"/>
         <meta property="og:image" content="/assets/img/logo.png"/>
         <meta property="og:type" content="website"/>
 
@@ -17,7 +17,7 @@
         <meta name="twitter:card" content="summary_large_image">
 
         
-        <title>Monitor &amp; Audit your Active Directory server. | Getting Started</title>
+        <title>Monitor &amp; Audit your Active Directory server. | Configuring Watchdog</title>
 
         <link rel="home" href="https://ldapwatchdog.com">
         <link rel="icon" href="/favicon.ico">
@@ -88,7 +88,7 @@
             <li class="pl-4">
             
         <a href="/docs/configuration"
-           class="lvl0  text-gray-700 nav-menu__item hover:text-blue-500"
+           class="lvl0  active font-semibold text-blue-500 nav-menu__item hover:text-blue-500"
         >
             Configuration
         </a>
@@ -133,84 +133,166 @@
         </nav>
 
         <div class="DocSearch-content content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
-            <h1 id="getting-started">Getting Started</h1>
+            <h1>Configuration</h1>
 
-<p>This is a starter template for creating a beautiful, customizable documentation site for your project with minimal effort. You’ll only have to change a few settings and you’re ready to go.</p>
+<ul>
+<li><a href="#watchers">Watchers</a>
 
-<h2 id="getting-started-configuration">Configuration</h2>
+<ul>
+<li><a href="#notification-channels">Notification Channels</a></li>
+<li><a href="#disabling-notifications">Disabling Notifications</a></li>
+</ul></li>
+<li><a href="#scan-frequency">Scan Frequency</a></li>
+<li><a href="#notifications">Notifications</a>
 
-<p>As with all Jigsaw sites, configuration settings can be found in <code>config.php</code>; you can update the variables in that file with settings specific to your project. You can also add new configuration variables there to use across your site; take a look at the <a href="http://jigsaw.tighten.co/docs/site-variables/">Jigsaw documentation</a> to learn more.</p>
+<ul>
+<li><a href="">Mail</a></li>
+<li><a href="">Seconds Between</a></li>
+</ul></li>
+<li><a href="">Date Options</a>
 
-<pre><code class="language-php">// config.php
-return [
-    'baseUrl' =&gt; 'https://my-awesome-jigsaw-site.com/',
-    'production' =&gt; false,
-    'siteName' =&gt; 'My Site',
-    'siteDescription' =&gt; 'Give your documentation a boost with Jigsaw.',
-    'docsearchApiKey' =&gt; '',
-    'docsearchIndexName' =&gt; '',
-    'navigation' =&gt; require_once('navigation.php'),
-];
+<ul>
+<li><a href="">Timezone</a></li>
+<li><a href="">Format</a></li>
+</ul></li>
+<li><a href="">Attributes</a>
+
+<ul>
+<li><a href="">Transformers</a></li>
+<li><a href="">Ignoring Attributes</a></li>
+</ul></li>
+</ul>
+
+<h2>Introduction</h2>
+
+<p>Watchdog's configuration file various settings for each feature.</p>
+
+<p>This guide will explain each configuration option in-depth.</p>
+
+<h2 id="watchers">Watchers</h2>
+
+<p>Watchers in Watchdog are setup inside of the <code>watch</code> key in the <code>config/watchdog.php</code> file:</p>
+
+<pre><code class="language-php">'watch' =&gt; [
+    \LdapRecord\Models\ActiveDirectory\Entry::class =&gt; [
+        \DirectoryTree\Watchdog\Dogs\WatchGroupMembers::class =&gt; ['mail'],
+        // ...
+    ],
+],
 </code></pre>
+
+<p>Each <strong>key</strong> inside of this array must be an <a href="https://ldaprecord.com/docs/models">LdapRecord</a> model.</p>
+
+<p>The <strong>value</strong> of the above key must be an array of <a href="docs/dogs/">Watchdogs</a>, along with their notification channels.</p>
+
+<h3 id="notification-channels">Notification Channels</h3>
+
+<p>By default, only the <code>mail</code> notification channel is supported.</p>
+
+<h3 id="disabling-notifications">Disabling Notifications</h3>
+
+<p>To disable the dispatch of notifications of a specific watchdog, simply remove the channels you do not 
+want the watchdog to send notifications to:</p>
 
 <blockquote>
-  <p>Tip: This configuration file is also where you’ll define any "collections" (for example, a collection of the contributors to your site, or a collection of blog posts). Check out the official <a href="https://jigsaw.tighten.co/docs/collections/">Jigsaw documentation</a> to learn more.</p>
+  <p>Removing the notification channels <strong>does not</strong> disable the watchdog from tracking the notifications
+  it generates. It simply won't send the notification once watchdogs conditions pass.</p>
 </blockquote>
 
-<hr />
-
-<h3 id="getting-started-adding-content">Adding Content</h3>
-
-<p>You can write your content using a <a href="http://jigsaw.tighten.co/docs/content-other-file-types/">variety of file types</a>. By default, this starter template expects your content to be located in the <code>source/docs</code> folder. If you change this, be sure to update the URL references in <a href="/docs/navigation.php">navigation.php</a>.</p>
-
-<p><a href="/docs/navigation">Read more about navigation.</a></p>
-
-<p>The first section of each content page contains a YAML header that specifies how it should be rendered. The <code>title</code> attribute is used to dynamically generate HTML <code>title</code> and OpenGraph tags for each page. The <code>extends</code> attribute defines which parent Blade layout this content file will render with (e.g. <code>_layouts.documentation</code> will render with <code>source/_layouts/documentation.blade.php</code>), and the <code>section</code> attribute defines the Blade "section" that expects this content to be placed into it.</p>
-
-<pre><code class="language-yaml">---
-title: Navigation
-description: Building a navigation menu for your site
-extends: _layouts.documentation
-section: content
----
+<pre><code class="language-php">\DirectoryTree\Watchdog\Dogs\WatchGroupMembers::class =&gt; [],
 </code></pre>
 
-<p><a href="https://jigsaw.tighten.co/docs/content-blade/">Read more about Jigsaw layouts.</a></p>
+<h2 id="scan-frequency">Scan Frequency</h2>
 
-<hr />
+<p>The <code>frequency</code> option is how often Watchdog must wait before being allowed to start another scan:</p>
 
-<h3 id="getting-started-adding-assets">Adding Assets</h3>
+<pre><code class="language-php">'frequency' =&gt; env('WATCHDOG_SCAN_FREQUENCY', 5),
+</code></pre>
 
-<p>Any assets that need to be compiled (such as JavaScript, Less, or Sass files) can be added to the <code>source/_assets/</code> directory, and Laravel Mix will process them when running <code>npm run local</code> or <code>npm run production</code>. The processed assets will be stored in <code>/source/assets/build/</code> (note there is no underscore on this second <code>assets</code> directory).</p>
+<h2>Notifications</h2>
 
-<p>Then, when Jigsaw builds your site, the entire <code>/source/assets/</code> directory containing your built files (and any other directories containing static assets, such as images or fonts, that you choose to store there) will be copied to the destination build folders (<code>build_local</code>, on your local machine).</p>
+<p>Watchdog sends emails to the configured recipient located inside the configuration file:</p>
 
-<p>Files that don't require processing (such as images and fonts) can be added directly to <code>/source/assets/</code>.</p>
+<pre><code class="language-php">'notifications' =&gt; [
 
-<p><a href="http://jigsaw.tighten.co/docs/compiling-assets/">Read more about compiling assets in Jigsaw using Laravel Mix.</a></p>
+    'mail' =&gt; [
+        'to' =&gt; [env('WATCHDOG_NOTIFICATION_EMAIL', 'your@email.com')],
+    ],
 
-<hr />
+    // ...
+],
+</code></pre>
 
-<h2 id="getting-started-building-your-site">Building Your Site</h2>
+<p>Paste the following in your <code>.env</code> to easily customize it:</p>
 
-<p>Now that you’ve edited your configuration variables and know how to customize your styles and content, let’s build the site.</p>
+<pre><code class="language-text">WATCHDOG_NOTIFICATION_EMAIL=your@email.com
+</code></pre>
 
-<pre><code class="language-bash"># build static files with Jigsaw
-./vendor/bin/jigsaw build
+<p>Next is the <code>seconds_between_notifications</code> option:</p>
 
-# compile assets with Laravel Mix
-# options: dev, staging, production
-npm run dev
+<pre><code class="language-php">'notifications' =&gt; [
+    //... 
+
+    'seconds_between_notifications' =&gt; 5,
+],
+</code></pre>
+
+<p>This option adds a delay to each notification job that is created, so emails aren't
+sent too quickly -- which prevents the "Too many emails per second" SMTP error.</p>
+
+<p>This is very useful if you have a large directory and many changes can be detected at the same time.</p>
+
+<p>For example, if a scan is executed and 10 password changes are detected, this option will stagger each</p>
+
+<h2 id="date-options">Date Options</h2>
+
+<pre><code class="language-php">'date' =&gt; [
+
+    'timezone' =&gt; env('WATCHDOG_DATE_TIMEZONE', 'UTC'),
+
+    'format' =&gt; env('WATCHDOG_DATE_FORMAT', 'F jS, Y @ g:i A'),
+
+],
+</code></pre>
+
+<h2 id="attributes">Attributes</h2>
+
+<pre><code class="language-php">'transform' =&gt; [
+    'objectsid'             =&gt; 'objectsid',
+    'whenchanged'           =&gt; 'windows',
+    'whencreated'           =&gt; 'windows',
+    'dscorepropagationdata' =&gt; 'windows',
+    'lastlogon'             =&gt; 'windows-int',
+    'lastlogontimestamp'    =&gt; 'windows-int',
+    'pwdlastset'            =&gt; 'windows-int',
+    'lockouttime'           =&gt; 'windows-int',
+    'accountexpires'        =&gt; 'windows-int',
+    'badpasswordtime'       =&gt; 'windows-int',
+],
+
+'transformers' =&gt; [
+    'objectsid'   =&gt; \DirectoryTree\Watchdog\Ldap\Transformers\ObjectSid::class,
+    'windows'     =&gt; \DirectoryTree\Watchdog\Ldap\Transformers\WindowsTimestamp::class,
+    'windows-int' =&gt; \DirectoryTree\Watchdog\Ldap\Transformers\WindowsIntTimestamp::class,
+],
+
+'ignore' =&gt; [
+    'dscorepropagationdata',
+],
 </code></pre>
 
             <div class="mt-12 pt-8 pb-6 border-t-2">
                 <div class="flex flex-col-reverse md:flex-row justify-between items-center">
     <div class="flex flex-col items-center md:items-start">
+                    <span class="font-black text-gray-500 text-sm tracking-wider uppercase pb-1">← Previous Topic</span>
+            <h4 class="font-bold underline m-0 text-blue-700">
+                <a href="/docs/installation">Installation</a>
+            </h4>
             </div>
     <div class="mb-8 md:mb-0 flex flex-col items-center md:items-end">
                     <span class="font-black text-gray-500 text-sm tracking-wider uppercase pb-1">Next Topic →</span>
             <h4 class="font-bold underline m-0 text-blue-700">
-                <a href="/docs/installation">Installation</a>
+                <a href="/docs/dogs/index">Creating a Watchdog</a>
             </h4>
             </div>
 </div>

@@ -49,12 +49,28 @@
 }
 
 .content {
-  ol,ul {
-    @apply .ml-8;
+  h1 {
+    @apply .border-b-2;
+    @apply .border-gray-300;
   }
 
-  ul {
-    list-style:circle;
+  h2 {
+    @apply .border-b-2;
+    @apply .border-gray-300;
+  }
+
+  ol,ul {
+    @apply .list-none;
+  }
+
+  ul li a:before {
+    content:'# ';
+    @apply .text-gray-400;
+  }
+
+  ul li a {
+    @apply .text-sm;
+    @apply .text-gray-700;
   }
 
   /* Hide scrollbars. */
@@ -65,5 +81,21 @@
       width: 0;
       height: 0;
     }
+  }
+}
+
+table {
+  @apply w-full text-left rounded-lg overflow-hidden shadow;
+
+  th {
+    @apply text-sm font-semibold text-gray-700 p-2 bg-gray-300;
+  }
+
+  tr:first-child td {
+    @apply border-0;
+  }
+
+  td {
+    @apply p-2 border-t text-sm bg-white border-gray-400;
   }
 }
